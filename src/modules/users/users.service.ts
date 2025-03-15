@@ -1,9 +1,10 @@
-import { Injectable, Logger } from '@nestjs/common'; 
+import { Injectable, Logger, ConflictException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersRepository } from './repo/users.repository';
 import { User } from './entities/user.entity';
 import { Constants } from 'src/utils/constants';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -14,19 +15,30 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     try {
       this.logger.log('Creating a new user...');
+
+      // Verifica se o e-mail já existe no banco de dados
+      const existingUser = await this.usersRepository.findOne({ where: { email: createUserDto.email } });
+      if (existingUser) {
+        throw new ConflictException('Email is already registered');
+      }
+
+      // Criação do usuário
       let user: User = new User();
       user.email = createUserDto.email;
       user.firstName = createUserDto.firstName;
       user.lastName = createUserDto.lastName;
-      user.password = createUserDto.password;
       user.dateOfBirth = createUserDto.dateOfBirth;
       user.role = Constants.ROLES.NORMAL_ROLE;
-      
+
+      // Hash da senha antes de salvar
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(createUserDto.password, salt);
+
       const savedUser = await this.usersRepository.save(user);
-      this.logger.log(`User create: ${savedUser.id}`);
+      this.logger.log(`User created: ${savedUser.id}`);
       return savedUser;
     } catch (error) {
-      this.logger.error('Erro the create User', error.stack);
+      this.logger.error('Error creating user', error.stack);
       throw error;
     }
   }
@@ -44,7 +56,7 @@ export class UsersService {
   findUserByEmail(email: string) {
     try {
       this.logger.log(`Fetching user with email: ${email}`);
-      return this.usersRepository.findOne({ where: {  email : email } });
+      return this.usersRepository.findOne({ where: { email: email } });
     } catch (error) {
       this.logger.error(`Error fetching user with email: ${email}`, error.stack);
       throw error;
@@ -67,7 +79,7 @@ export class UsersService {
       return await this.usersRepository.findOneOrFail({ where: { id: id } });
     } catch (error) {
       this.logger.error(`Error fetching user with ID: ${id}`, error.stack);
-      throw error
+      throw error;
     }
   }
 

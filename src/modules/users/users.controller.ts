@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Put, UseGuards } from '@nes
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { RoleGuard } from '../auth/guard/role.guard';
 import { Constants } from 'src/utils/constants';
 
@@ -16,6 +16,7 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @ApiSecurity('JWT-auth')
   @Get()
   @UseGuards( new RoleGuard(Constants.ROLES.ADMIN_ROLE))
   findAll() {
@@ -37,6 +38,7 @@ export class UsersController {
     return this.usersService.update(+id, updateUserDto);
   }
 
+  @ApiSecurity('JWT-auth')
   @Delete(':id')
   @UseGuards( new RoleGuard(Constants.ROLES.ADMIN_ROLE))
   remove(@Param('id') id: string) {

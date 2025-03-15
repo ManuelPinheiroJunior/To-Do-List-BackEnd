@@ -14,16 +14,17 @@ async function bootstrap() {
                      'With it, users can create, edit, delete and list tasks. ' +
                      'In addition, it allows you to mark tasks as completed and filter them by status.')
     .setVersion('1.0')
+    .addTag('Login')
     .addTag('Users')
     .addTag('Tasks')
       .addBearerAuth({
       type: 'http',
       scheme: 'bearer',
       bearerFormat: 'JWT',
-      name: 'Authorization',
-      description: 'Insira o token JWT para autenticação',
+      name: 'JWT',
+      description: 'Enter JWT token',
       in: 'header',
-    })
+    }, 'JWT-auth')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
