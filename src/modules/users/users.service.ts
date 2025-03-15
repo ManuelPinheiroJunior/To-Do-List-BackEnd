@@ -1,10 +1,12 @@
 import { Injectable, Logger, ConflictException } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersRepository } from './repo/users.repository';
-import { User } from './entities/user.entity';
-import { Constants } from 'src/utils/constants';
+
+
 import * as bcrypt from 'bcrypt';
+import { User } from '@/users/entities/user.entity';
+import { CreateUserDto } from '@/users/dto/create-user.dto';
+import { UsersRepository } from '@/users/repo/users.repository';
+import { UpdateUserDto } from '@/users/dto/update-user.dto';
+import { Constants } from '@/utils/constants';
 
 @Injectable()
 export class UsersService {

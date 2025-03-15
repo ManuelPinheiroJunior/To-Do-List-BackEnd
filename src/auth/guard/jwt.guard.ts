@@ -1,6 +1,7 @@
+import { Constants } from '@/utils/constants';
 import { ExecutionContext, Injectable } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
-import { Constants } from 'src/utils/constants';
+
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('jwt') {
