@@ -14,6 +14,7 @@ async function bootstrap() {
                      'With it, users can create, edit, delete and list tasks. ' +
                      'In addition, it allows you to mark tasks as completed and filter them by status.')
     .setVersion('1.0')
+    .addTag('Login')
     .addTag('Users')
     .addTag('Tasks')
       .addBearerAuth({
