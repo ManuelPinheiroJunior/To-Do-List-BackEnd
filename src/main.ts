@@ -20,10 +20,10 @@ async function bootstrap() {
       type: 'http',
       scheme: 'bearer',
       bearerFormat: 'JWT',
-      name: 'Authorization',
-      description: 'Insira o token JWT para autenticação',
+      name: 'JWT',
+      description: 'Enter JWT token',
       in: 'header',
-    })
+    }, 'JWT-auth')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
