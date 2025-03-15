@@ -16,12 +16,13 @@ export class UsersService {
     try {
       this.logger.log('Creating a new user...');
 
+      // Verifica se o e-mail já existe no banco de dados
       const existingUser = await this.usersRepository.findOne({ where: { email: createUserDto.email } });
       if (existingUser) {
         throw new ConflictException('Email is already registered');
       }
 
-    
+      // Criação do usuário
       let user: User = new User();
       user.email = createUserDto.email;
       user.firstName = createUserDto.firstName;
@@ -29,6 +30,7 @@ export class UsersService {
       user.dateOfBirth = createUserDto.dateOfBirth;
       user.role = Constants.ROLES.NORMAL_ROLE;
 
+      // Hash da senha antes de salvar
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(createUserDto.password, salt);
 
