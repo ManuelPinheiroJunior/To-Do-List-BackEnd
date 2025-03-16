@@ -3,6 +3,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { TasksRepository } from './repo/tasks.repository';
 import { Task } from './entities/task.entity';
 import { UsersService } from '../users/users.service';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
   // add Task based on userId
   // get all tasks based on userId (task complete)
@@ -54,6 +55,10 @@ export class TasksService {
 
   update(taskId: number) {
     return this.tasksRepository.update(taskId , {status : true});
+  }
+
+  async editTask(taskId: number, updateTaskDto: UpdateTaskDto) {
+    return await this.tasksRepository.update(taskId, { title: updateTaskDto.title });
   }
   
   remove(taskId: number) {

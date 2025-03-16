@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ValidationPipe, Put } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 
 @ApiTags('Tasks')
@@ -29,6 +30,11 @@ export class TasksController {
   @Patch('Check/:userId')
   update(@Param('userId') userId: string) {
     return this.tasksService.update(Number(userId));
+  }
+
+   @Put('/edit/:taskId')
+  editTask(@Param('taskId') taskId: number, @Body(ValidationPipe) updateTaskDto: UpdateTaskDto) {
+    return this.tasksService.editTask(Number(taskId), updateTaskDto);
   }
 
   @Delete(':userId')
