@@ -16,22 +16,15 @@ export class TasksService {
   constructor(private tasksRepository: TasksRepository, private userService : UsersService) {}
 
 
-  async create(createTaskDto: CreateTaskDto, userId: number) {
-
-    const user = await this.userService.findUserById(userId);
-    if (!user) {
-        throw new Error(`User with ID ${userId} not found.`);
-    }
-
-    let task: Task = new Task();
+  async create(createTaskDto: CreateTaskDto, userId : number) {
+    let task : Task = new Task();
     task.title = createTaskDto.title;
     task.date = new Date().toLocaleString();
     task.status = false;
-    task.user = user; 
+    task.user = await this.userService.findUserById(userId);
 
     return this.tasksRepository.save(task);
-}
-
+  }
 
   findAllTaskByUserCompleted(userId : number) {
     try
