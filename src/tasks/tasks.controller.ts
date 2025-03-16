@@ -26,7 +26,7 @@ export class TasksController {
     return this.tasksService.findAllTaskByUserNotCompleted(userId);
   }
 
-  @Patch(':userId')
+  @Patch('Check/:userId')
   update(@Param('userId') userId: string) {
     return this.tasksService.update(Number(userId));
   }
