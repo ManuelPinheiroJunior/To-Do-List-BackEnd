@@ -14,7 +14,7 @@ export class AuthController {
   @Post('/login')
   @UseGuards(AuthGuard('local'))
   login(@Req() req, @Body() loginDto: LoginDto) {
-    //   jwt token
+
     const user: User = req.user;
     const payload = {
       userId: user.id,
