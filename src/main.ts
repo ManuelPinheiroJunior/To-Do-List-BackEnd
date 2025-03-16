@@ -7,6 +7,8 @@ import { JwtAuthGuard } from './auth/guard/jwt.guard';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  const BASE_URL = process.env.BASE_URL || 'https://to-do-list-back-end-git-release-v100-juniors-projects-f3583d9e.vercel.app';
+
     app.enableCors();
     app.useGlobalGuards(new JwtAuthGuard());
 
