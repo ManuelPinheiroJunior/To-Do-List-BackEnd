@@ -9,7 +9,11 @@ async function bootstrap() {
 
   const BASE_URL = process.env.BASE_URL || 'https://to-do-list-back-end-git-release-v100-juniors-projects-f3583d9e.vercel.app';
 
-    app.enableCors();
+     app.enableCors({
+    origin: ["https://to-do-list-frontend-lac.vercel.app"], 
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+    });
     app.useGlobalGuards(new JwtAuthGuard());
 
     const config = new DocumentBuilder()
