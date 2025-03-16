@@ -5,8 +5,9 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersRepository } from './repo/users.repository';
 import { User } from './entities/user.entity';
-import { Constants } from 'src/utils/constants';
+
 import { UpdateUserDto } from './dto/update-user.dto';
+import { Constants } from 'utils/constants';
 
 @Injectable()
 export class UsersService {
