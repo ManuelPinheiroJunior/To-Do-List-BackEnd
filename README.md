@@ -1,47 +1,80 @@
-# To-Do-List-BackEnd
-Development  To-do list application
-NestJs with Swagger for API.
+# 📌 To-Do-List-BackEnd
 
-# Project Goals
-- User Authentication:
-Login screen and registration of new users using secure authentication.
-- Task Management: 
-Create, edit, delete and list tasks.
-Mark tasks as completed.
-Filter tasks by status (pending, completed).
+A **To-Do List** application built with **NestJS**, featuring **Swagger** for API documentation.
 
+## 🚀 Project Goals
 
-# Branch Pattern for your Project
-Main Structure
-main → Stable and production-ready version.
-staging → Test environment before going to production.
-develop → Main branch for continuous development.
-Workflow
-🔹 Feature Branches (New Features)
-Created from the develop branch.
-Default name: feature/feature-name
-🔹 Bugfix Branches (Bug Fixes)
-Created from staging or development (if it is a bug found in the testing environment). Default name: bugfix/bug-name
-Example:
-bugfix/fix-login
-bugfix/error-in-task-listing
-🔹 Hotfix Branches (Critical Fixes in Production)
-Created from main to fix an urgent bug without waiting for a new release.
-Default name: hotfix/hotfix-name
-🔹 Release Branches (Preparation for Deployment)
-Created from development, stabilized the version before going to main.
-Default name: release/vX.X.X
-  Complete Flow
- - Feature Development
+### ✅ User Authentication
+- Secure user authentication with login and registration.
+- Password hashing using **bcrypt**.
+- JWT-based authentication for secure access.
 
-Create a feature/new-feature branch from development.
-Develop, test, and merge into the development branch.
-- Testing and Release Preparation
+### ✅ Task Management
+- Create, edit, delete, and list tasks.
+- Mark tasks as **completed**.
+- Filter tasks by status (**pending** or **completed**).
 
-When a set of features is ready, create a release/vX.X.X branch from development.
-Test and fix any bugs before merging into staging.
-- Deploy to Staging
+---
 
-Merge release/vX.X.X into the staging branch.
-Test the application in staging.
-- Deploy to Production
+## 🏗️ **Branching Strategy**
+
+We follow a **Git Flow**-inspired branching model to ensure a well-organized and scalable codebase.
+
+### 📌 **Main Branches**
+- **`main`** → Stable and production-ready version.
+- **`staging`** → Test environment before deployment.
+- **`develop`** → Main branch for continuous development.
+
+### 📌 **Workflow**
+#### 🔹 **Feature Branches (New Features)**
+- Created from `develop`.
+- Default naming: `feature/<feature-name>`.
+- Example:  
+  - `feature/authentication-jwt`
+  - `feature/task-crud`
+
+#### 🔹 **Bugfix Branches (Bug Fixes)**
+- Created from `staging` or `develop` (if found in testing).
+- Default naming: `bugfix/<bug-name>`.
+- Example:
+  - `bugfix/fix-login`
+  - `bugfix/task-list-error`
+
+#### 🔹 **Hotfix Branches (Critical Fixes in Production)**
+- Created from `main` for urgent fixes.
+- Default naming: `hotfix/<hotfix-name>`.
+- Example:
+  - `hotfix/fix-expired-token`
+  - `hotfix/fix-500-error`
+
+#### 🔹 **Release Branches (Pre-Release Preparation)**
+- Created from `develop` for version stabilization.
+- Default naming: `release/vX.X.X`.
+- Example:
+  - `release/v1.0.0`
+  - `release/v1.1.0`
+
+---
+
+## 🔄 **Complete Git Flow**
+1️⃣ **Feature Development**
+   - Create a `feature/<new-feature>` branch from `develop`.
+   - Develop, test, and merge back into `develop`.
+
+2️⃣ **Testing and Release Preparation**
+   - When a set of features is ready, create a `release/vX.X.X` branch from `develop`.
+   - Test and fix any bugs before merging into `staging`.
+
+3️⃣ **Deploy to Staging**
+   - Merge `release/vX.X.X` into `staging`.
+   - Test the application in the staging environment.
+
+4️⃣ **Deploy to Production**
+   - If everything is stable, merge `release/vX.X.X` into `main`.
+   - Deploy the `main` branch to production.
+
+---
+
+## 📖 API Documentation
+- This project includes **Swagger** for API documentation.
+- Once the server is running, visit:

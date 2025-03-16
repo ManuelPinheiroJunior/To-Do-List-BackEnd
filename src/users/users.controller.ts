@@ -4,7 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
 import { RoleGuard } from '../auth/guard/role.guard';
-import { Constants } from 'src/utils/constants';
+import { Constants } from 'utils/constants';
 
 
 
