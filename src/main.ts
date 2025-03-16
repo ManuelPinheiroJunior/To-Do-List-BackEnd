@@ -35,12 +35,6 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, documentFactory);
 
 
-  const document = SwaggerModule.createDocument(app, config);
-
-  SwaggerModule.setup('api', app, document, {
-    customSiteTitle: 'To-Do API Docs',
-  })
-
    await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
