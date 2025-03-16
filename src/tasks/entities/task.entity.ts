@@ -6,18 +6,18 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 export class Task {
 
     @PrimaryGeneratedColumn()
-    userId: number;
+    Id: number;
 
     @Column()
     title: string;
 
     @Column()
-    date?: string;
+    date: string;
 
     @Column()   
-    status?: boolean;
+    status: boolean;
 
-    @ManyToOne(() => User, (user)=> user.tasks)
+    @ManyToOne(() => User, (user) => user.tasks)
     user : User;
 
 }
