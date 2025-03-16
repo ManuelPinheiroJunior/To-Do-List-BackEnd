@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, ValidationPipe } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { ApiSecurity, ApiTags } from '@nestjs/swagger';
@@ -11,7 +11,7 @@ export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
   @Post(':userId')
-  create(@Body() createTaskDto: CreateTaskDto, @Param('userId') userId : number) {
+  create(@Body(ValidationPipe) createTaskDto: CreateTaskDto, @Param('userId') userId : number) {
     return this.tasksService.create(createTaskDto, userId);
   }
 
